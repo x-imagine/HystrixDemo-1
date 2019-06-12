@@ -1,19 +1,19 @@
 # Spring Cloud Circuit Breaker Demo
 
 This application is intended to be a reference point for application setup and usage
-of [Spring Cloud Hystrix]() as a Circuit Breaker implementaion for a Spring Boot
+of [Spring Cloud Hystrix](https://github.com/Netflix/Hystrix/wiki) as a Circuit Breaker implementaion for a Spring Boot
 Microservice Architecture.  
 
 ## Assumptions
-This repository assumes you have knowledge of the [Pivotal Cloud Foundry CLI]() and 
-access to a running instance of [Pivotal Application Service]() such as Pivotal Web
+This repository assumes you have knowledge of the [Pivotal Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/getting-started.html) and 
+access to a running instance of [Pivotal Application Service](https://run.pivotal.io/) such as Pivotal Web
 Service or an On-Prem installation. If you do not have access to an existing instance
-you can sign up for a no-committal [trial with Pivotal directly]()
+you can sign up for a no-committal [trial with Pivotal directly](https://try.run.pivotal.io)
 
 ## Building the Demo
 This reference repository contains 2 modules.  One for [the producer application](Circuit-Breaker-Book-List)
 and one for [the consumer application](Circuit-Breaker-To-Read-List).  Each module is
-packaged with [Maven]() build tools including [Maven Wrapper](). Each application can
+packaged with [Maven](https://maven.apache.org/) build tools including [Maven Wrapper](https://www.baeldung.com/maven-wrapper). Each application can
 individually built from the base repository file by running the following commands using 
 
 ##### Bash (Mac & Linux) 
@@ -80,7 +80,7 @@ provides configuration based setup for these groups.
 
 ### Property Based Setup (Application Properties)
 Our demo also provides a convenient point of reference for [application property](Circuit-Breaker-Lunch-N-Learn/Circuit-Breaker-To-Read-List/src/main/resources/application.yml) 
-based setup.  This list is not exhaustive but provides simplistic examples of the extensiblity
+based setup.  This list is not exhaustive but provides simplistic examples of the extensibility
 of hystrix to support multiple failure thresholds, timeout styles, evaluation windows, and isolation strategies.
 
 
@@ -88,5 +88,6 @@ of hystrix to support multiple failure thresholds, timeout styles, evaluation wi
 This repository and demo are based off the Spring Cloud Circuit Breaker demo application and the 
 Hystrix Wiki on Github. Please refer to those sources for a deeper understanding of the power of 
 circuit breaker patterns. 
-[Spring Cloud Circuit Breaker Demo]()
-[Hystrix Github WIKI]()
+[Circuit Breaker Patterns](https://martinfowler.com/bliki/CircuitBreaker.html)
+[Spring Cloud Circuit Breaker Demo](https://spring.io/guides/gs/circuit-breaker/)
+[Hystrix Github WIKI](https://github.com/Netflix/Hystrix/wiki)
