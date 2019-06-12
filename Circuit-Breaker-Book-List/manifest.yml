@@ -1,0 +1,10 @@
+---
+applications:
+- name: book-list
+  instances: 1
+  memory: 1G
+  path: target/circuit-breaker-book-list-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: book-list-lnl-demo.cfapps.io
+  services:
+  - demo-circuit-breaker
