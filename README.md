@@ -61,10 +61,20 @@ of an open circuit outage.
 
 ### Fallback Methods
 In [our example](BookService.java)
-you are able to see we use a fallback method of `reliable`  the `reliable()` method uses no
-network calls and returns a static, context relevant message in the event of an outage
-to provide a continued valuable user experience when our down-stream dependency
-fails. 
+you are able to see we use a fallback method of `reliable` in the `@HystrixCommand()` annotation. 
+This method uses no network calls and returns a static, context relevant message in the event
+of an outage to provide a continued valuable user experience when our down-stream dependency
+fails. This is a reccommended best practice : When using a circuit breaker to protect yourself from
+dependency failur you should always have a fallback path that can be executed independently of *any*
+downstream system.  
+
+If desired, you can use a fallback method that can be another Hystrix Command.  For example: Imagine you
+have a cloud instance of mySql and that begins to fail.  You have implemented a Circuit Breaker on that
+command and provided a primary fallback method that makes a SOAP call to an on premise solution to fetch
+the data reqired to continue to serve your clients.  That method is even wrapped in a circuit breaker to ensure
+that if your secondary path fails you still have coverage. That third method could be another circuit breaker call
+to another system (you can chain hystrix paths indefinitely, though we suggest no more than 2) and that your
+final fallback method should be entirely indepodent and rely on nothing other than your own system. 
 
 ### Command Key
 The `commandkey` used in the annotation is used to identify the call in what is known as a 
@@ -79,15 +89,25 @@ and may need much longer to recover than other cloud based dependencies. Using c
 provides configuration based setup for these groups.
 
 ### Property Based Setup (Application Properties)
-Our demo also provides a convenient point of reference for [application property](Circuit-Breaker-Lunch-N-Learn/Circuit-Breaker-To-Read-List/src/main/resources/application.yml) 
+Our demo also provides a convenient point of reference for [application property](/Circuit-Breaker-To-Read-List/src/main/resources/application.yml) 
 based setup.  This list is not exhaustive but provides simplistic examples of the extensibility
 of hystrix to support multiple failure thresholds, timeout styles, evaluation windows, and isolation strategies.
 
+#### Property based setup command key interpolation
+One item we would like to call attention to is that spring utilizes the `commandkey` when evaluating the branch
+of properties to use for any one command.  We have a command key group of `booklistcall` that has all of its specific properties located here: 
+
+```yaml
+hystrix:
+  booklistcall:
+    (Properties specific to HystrixCommands that are grouped under the booklistcall group)
+```
 
 ### Further Reading 
 This repository and demo are based off the Spring Cloud Circuit Breaker demo application and the 
 Hystrix Wiki on Github. Please refer to those sources for a deeper understanding of the power of 
 circuit breaker patterns. 
-[Circuit Breaker Patterns](https://martinfowler.com/bliki/CircuitBreaker.html)
-[Spring Cloud Circuit Breaker Demo](https://spring.io/guides/gs/circuit-breaker/)
-[Hystrix Github WIKI](https://github.com/Netflix/Hystrix/wiki)
+
+- [Circuit Breaker Patterns](https://martinfowler.com/bliki/CircuitBreaker.html)
+- [Spring Cloud Circuit Breaker Demo](https://spring.io/guides/gs/circuit-breaker/)
+- [Hystrix Github WIKI](https://github.com/Netflix/Hystrix/wiki)
