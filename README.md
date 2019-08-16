@@ -106,7 +106,7 @@ hystrix:
 ### Further Reading 
 This repository and demo are based off the Spring Cloud Circuit Breaker demo application and the 
 Hystrix Wiki on Github. Please refer to those sources for a deeper understanding of the power of 
-circuit breaker patterns. 
+circuit breaker patterns. Additionally you can review the [attached slides](/SpringCloudCircuitBreaker.pdf) used during the presentation.
 
 - [Circuit Breaker Patterns](https://martinfowler.com/bliki/CircuitBreaker.html)
 - [Spring Cloud Circuit Breaker Demo](https://spring.io/guides/gs/circuit-breaker/)
